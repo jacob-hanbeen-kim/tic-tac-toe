@@ -63,3 +63,13 @@ class HumanPlayer(Player):
                 print('Invalid entry! Try again.')
 
         return choice[index]
+
+class MiniMax(Player):
+    """
+    This player will try to beat Player in the game.
+    """
+    def __init__(self, symbol, name="MiniMax"):
+        super().__init__(symbol,move)
+
+    def move(self, game):
+        pass
