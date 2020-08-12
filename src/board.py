@@ -23,6 +23,9 @@ class Board:
 
     def apply_move(self, player):
         move = player.move(self)
+        if move == None:
+            return True, 'DRAW :((((((('
+            
         if move in self.possible_moves:
             symbol = player.get_symbol()
             name = player.get_name()
@@ -36,7 +39,7 @@ class Board:
             print("")
 
             if self.__check_game_state__(move, symbol):
-                return True, player.get_name() + ' WIN!'                
+                return True, player.get_name() + ' WIN!'
         else:
             return True, 'Error. Invalid move!'
 
@@ -54,7 +57,7 @@ class Board:
             vertical = vertical and self.board[s][j] == symbol
             horizontal = horizontal and self.board[i][s] == symbol
             diagonal_1 = diagonal_1 and self.board[s][s] == symbol
-            diagonal_2 = diagonal_2 and self.board[s][self.size - 1] == symbol
+            diagonal_2 = diagonal_2 and self.board[s][self.size - 1 - s] == symbol
 
         return vertical or horizontal or diagonal_1 or diagonal_1
 

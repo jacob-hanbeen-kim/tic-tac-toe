@@ -5,7 +5,6 @@ class Player:
     def __init__(self, symbol, name="Player"):
         self.name = name
         self.symbol = symbol
-        self.moves = []
 
     def move(self, game):
         pass

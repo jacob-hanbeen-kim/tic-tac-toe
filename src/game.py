@@ -42,6 +42,7 @@ class Game:
             else:
                 self.switch_turn()
 
+
 player1 = HumanPlayer("O")
 player2 = RandomPlayer("X")
 board_size = 3
