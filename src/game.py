@@ -32,7 +32,7 @@ class Game:
 
         while not game_over:
             print("======== {} turn! ========".format(self.__active_player__.get_name()))
-            game_over, msg = self.__board__.apply_move(self.__active_player__)
+            game_over, msg, player = self.__board__.apply_move(self.__active_player__)
 
             if (game_over):
                 ending_msg = "><><><><><>< {} ><><><><><><".format(msg)

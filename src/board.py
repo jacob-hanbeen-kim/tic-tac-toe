@@ -23,9 +23,6 @@ class Board:
 
     def apply_move(self, player):
         move = player.move(self)
-        if move == None:
-            return True, 'DRAW :((((((('
-            
         if move in self.possible_moves:
             symbol = player.get_symbol()
             name = player.get_name()
@@ -39,11 +36,14 @@ class Board:
             print("")
 
             if self.__check_game_state__(move, symbol):
-                return True, player.get_name() + ' WIN!'
+                return True, player.get_name() + ' WIN!', player
+            else:
+                if (not self.possible_moves):
+                    return True, 'DRAW :(((((((', None
         else:
             return True, 'Error. Invalid move!'
 
-        return False, ''
+        return False, '', None
 
     def __check_game_state__(self, move, symbol):
         i = move[0]
