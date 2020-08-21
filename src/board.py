@@ -21,8 +21,7 @@ class Board:
     def get_possible_move(self):
         return self.possible_moves
 
-    def apply_move(self, player):
-        move = player.move(self)
+    def apply_move(self, player, move):
         if move in self.possible_moves:
             symbol = player.get_symbol()
             name = player.get_name()
