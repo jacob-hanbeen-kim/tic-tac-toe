@@ -1,5 +1,5 @@
 from board import Board
-from player import HumanPlayer, RandomPlayer
+from player import HumanPlayer, RandomPlayer, MinimaxPlayer
 
 class Game:
 
@@ -45,7 +45,7 @@ class Game:
 
 
 player1 = HumanPlayer("O")
-player2 = RandomPlayer("X")
+player2 = MinimaxPlayer("X")
 board_size = 3
 
 game = Game(player1, player2, board_size)
