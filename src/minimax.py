@@ -23,7 +23,7 @@ def getBestMove(game, symbol):
         pm = possible_moves[:]
         pm.remove(m)
 
-        curScore, curMove = minimax(deepcopy(board), m, pm, isMaximizing, depth)
+        curScore = minimax(deepcopy(board), m, pm, isMaximizing, depth)
         
         # If maximizing, check if curScore is higher than bestScore, and replace
         if (isMaximizing):
@@ -48,7 +48,6 @@ def minimax (board, move, possible_moves, isMaximizing, depth):
     # Apply the move to the board
     i, j = move
     board[i][j] = symbol
-    depth += 1
 
     # print("=============")
     # print(isMaximizing)
@@ -60,14 +59,13 @@ def minimax (board, move, possible_moves, isMaximizing, depth):
     # print("=============")
     # Check if game is won by current player. If yes, return score and move
     if(checkBoard(board, move, symbol)):
-        return getScore(isMaximizing, depth), move
+        return getScore(isMaximizing, depth)
 
     # Check if there is no more possible move. Draw - return 0 and move
     if (not possible_moves):
-        return 0, move
+        return 0
 
-    # Iterate through each possible move to determine bestScore and bestMove
-    bestMove = None
+    # Iterate through each possible move to determine bestScore
     if (isMaximizing):
         bestScore = float("-inf")
     else:
@@ -79,19 +77,15 @@ def minimax (board, move, possible_moves, isMaximizing, depth):
         pm.remove(m)
 
         # Recurse with move m and switch the isMaximizing
-        curScore, curMove = minimax(deepcopy(board), m, pm, not(isMaximizing), depth)
+        curScore = minimax(deepcopy(board), m, pm, not(isMaximizing), depth + 1)
 
         # If maximizing, check if curScore is higher than bestScore, and replace
         if (isMaximizing):
-            if (curScore > bestScore):
-                bestScore = curScore
-                bestMove = curMove
+            bestScore = max(curScore, bestScore)
         else: # If minimizing, check if curScore is lower than bestScore, and replace
-            if (curScore < bestScore):
-                bestScore = curScore
-                bestMove = curMove
+            bestScore = min(curScore, bestScore)
 
-    return bestScore, bestMove
+    return bestScore
 
 def checkBoard(board, move, symbol):
     i = move[0]
@@ -112,7 +106,9 @@ def checkBoard(board, move, symbol):
 
 def getScore(isMaximizing, depth):
     if (isMaximizing):
-        return 100 / (10 ** (depth - 1))
+        # return 100 / (10 ** (depth - 1))
+        return 10
     else:
-        return -100 / (10 ** (depth - 1))
+        # return -100 / (10 ** (depth - 1))
+        return -10
 
