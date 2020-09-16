@@ -23,7 +23,10 @@ def getBestMove(game, symbol):
         pm = possible_moves[:]
         pm.remove(m)
 
-        curScore = minimax(deepcopy(board), m, pm, isMaximizing, depth)
+        i, j = m
+        board[i][j] = "X"
+        curScore = minimax(board, m, pm, not(isMaximizing), depth)
+        board[i][j] = " "
         
         # If maximizing, check if curScore is higher than bestScore, and replace
         if (isMaximizing):
@@ -42,12 +45,12 @@ def minimax (board, move, possible_moves, isMaximizing, depth):
 
     # Maximizing player = "O" and Minimizing player = "X"
     symbol = "X"
-    if (isMaximizing):
+    if (not(isMaximizing)):
         symbol= "O"
 
     # Apply the move to the board
-    i, j = move
-    board[i][j] = symbol
+    # i, j = move
+    # board[i][j] = symbol
 
     # print("=============")
     # print(isMaximizing)
@@ -59,7 +62,7 @@ def minimax (board, move, possible_moves, isMaximizing, depth):
     # print("=============")
     # Check if game is won by current player. If yes, return score and move
     if(checkBoard(board, move, symbol)):
-        return getScore(isMaximizing, depth)
+        return getScore(not(isMaximizing), depth)
 
     # Check if there is no more possible move. Draw - return 0 and move
     if (not possible_moves):
@@ -71,13 +74,20 @@ def minimax (board, move, possible_moves, isMaximizing, depth):
     else:
         bestScore = float("inf")
 
+    symbol = "X"
+    if (isMaximizing):
+        symbol= "O"
+
     for m in possible_moves:
 
         pm = possible_moves[:]
         pm.remove(m)
 
         # Recurse with move m and switch the isMaximizing
-        curScore = minimax(deepcopy(board), m, pm, not(isMaximizing), depth + 1)
+        i, j = m
+        board[i][j] = symbol
+        curScore = minimax(board, m, pm, not(isMaximizing), depth + 1)
+        board[i][j] = " "
 
         # If maximizing, check if curScore is higher than bestScore, and replace
         if (isMaximizing):

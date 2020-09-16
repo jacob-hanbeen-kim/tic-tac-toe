@@ -14,7 +14,7 @@ class Board:
         self.possible_moves = []
         for i in range(0, self.size):
             for j in range(0, self.size):
-                self.possible_moves.append((i,j))
+                self.possible_moves.append((j,i))
 
         self.not_possible_moves = []
 
