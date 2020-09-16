@@ -1,5 +1,6 @@
 from random import randint
 import random
+from minimax import getBestMove
 
 class Player:
     def __init__(self, symbol, name="Player"):
@@ -62,3 +63,13 @@ class HumanPlayer(Player):
                 print('Invalid entry! Try again.')
 
         return choice[index]
+
+class MinimaxPlayer(Player):
+    """
+    This player will try to beat Player in the game.
+    """
+    def __init__(self, symbol, name="MiniMax"):
+        super().__init__(symbol, name)
+
+    def move(self, game):
+        return getBestMove(game, self.symbol)
