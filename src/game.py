@@ -1,5 +1,5 @@
 from board import Board
-from player import HumanPlayer, RandomPlayer
+from player import HumanPlayer, RandomPlayer, MinimaxPlayer
 
 class Game:
 
@@ -29,6 +29,10 @@ class Game:
     def play_game(self):
 
         game_over = False
+        # self.__board__.board = [["O", "X", " "],
+        #                         ["X", " ", " "],
+        #                         [" ", " ", " "]]
+        # self.__board__.possible_moves = [(0,2), (1, 2), (2,0), (2,2)]
 
         while not game_over:
             print("======== {} turn! ========".format(self.__active_player__.get_name()))
@@ -45,7 +49,7 @@ class Game:
 
 
 player1 = HumanPlayer("O")
-player2 = RandomPlayer("X")
+player2 = MinimaxPlayer("X")
 board_size = 3
 
 game = Game(player1, player2, board_size)

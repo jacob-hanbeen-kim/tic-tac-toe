@@ -1,5 +1,6 @@
 from random import randint
 import random
+from minimax import getBestMove
 
 class Player:
     def __init__(self, symbol, name="Player"):
@@ -63,12 +64,12 @@ class HumanPlayer(Player):
 
         return choice[index]
 
-class MiniMax(Player):
+class MinimaxPlayer(Player):
     """
     This player will try to beat Player in the game.
     """
     def __init__(self, symbol, name="MiniMax"):
-        super().__init__(symbol,move)
+        super().__init__(symbol, name)
 
     def move(self, game):
-        pass
+        return getBestMove(game, self.symbol)
